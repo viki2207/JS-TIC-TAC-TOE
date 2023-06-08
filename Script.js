@@ -1,15 +1,15 @@
 const X_CLASS = "x";
 const CIRCLE_CLASS = "circle";
-const WINNING_COMBINATIONS = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6],
-];
+
+var arr1 = [0, 1, 2];
+var arr2 = [3, 4, 5];
+var arr3 = [6, 7, 8];
+var arr4 = [0, 3, 6];
+var arr5 = [1, 4, 7];
+var arr6 = [2, 5, 8];
+var arr7 = [0, 4, 8];
+var arr8 = [2, 4, 6];
+const WINNING_COMBINATIONS = [arr1, arr2, arr3, arr4, arr5, arr6, arr7, arr8];
 const cellElements = document.querySelectorAll("[data-cell]");
 const board = document.getElementById("board");
 const winningMessageElement = document.getElementById("winningMessage");
@@ -40,11 +40,7 @@ function handleClick(e) {
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
   placeMark(cell, currentClass);
   if (checkWin(currentClass)) {
-    if (false) {
-      endGame(true);
-    } else {
-      endGame(false);
-    }
+    endGame(false);
   } else if (isDraw()) {
     alert(isDraw());
     endGame(true);
@@ -55,6 +51,7 @@ function handleClick(e) {
 }
 
 function endGame(draw) {
+  alert(draw);
   if (draw) {
     winningMessageTextElement.innerText = "Draw!";
   } else {
@@ -65,8 +62,9 @@ function endGame(draw) {
 
 function isDraw() {
   return [...cellElements].every((cell) => {
-    return;
-    cell.classList.contains(X_CLASS) || cell.classList.contains(CIRCLE_CLASS);
+    return (
+      cell.classList.contains(X_CLASS) || cell.classList.contains(CIRCLE_CLASS)
+    );
   });
 }
 
@@ -89,6 +87,10 @@ function setBoardHoverClass() {
 }
 
 function checkWin(currentClass) {
+  for (var i = 0; i < WINNING_COMBINATIONS.length; i++) {
+    console.log(WINNING_COMBINATIONS[i]);
+  }
+
   return WINNING_COMBINATIONS.some((combination) => {
     return combination.every((index) => {
       return cellElements[index].classList.contains(currentClass);
