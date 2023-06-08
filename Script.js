@@ -42,7 +42,6 @@ function handleClick(e) {
   if (checkWin(currentClass)) {
     endGame(false);
   } else if (isDraw()) {
-    alert(isDraw());
     endGame(true);
   } else {
     swapTurns();
@@ -51,7 +50,6 @@ function handleClick(e) {
 }
 
 function endGame(draw) {
-  alert(draw);
   if (draw) {
     winningMessageTextElement.innerText = "Draw!";
   } else {
